@@ -147,3 +147,21 @@ Revert command in GIT
 > save the file. Revert will be complete and a new commit id will be generated
 
 # git revert <deletioncommitid>
+
+Close the name editor
+
+press CTL x
+press y
+press enter key
+
+
+# git ls-files
+
+# ls
+
+index1.html file will be back
+
+
+
+
+
