@@ -81,6 +81,139 @@ Select the commit id which is at the bottom of your log.
 
 Example : git reset --hard 04f432e
 
+============================================
+GIT stash:
+=====================================
+
+If you have some incomplete changes in working directory
+
+
+
+Incomplete Changes: Files with some modifications in it, These changes are still in Working directory and not staged or committed
+
+I don't wish to discard the changes -> because we cannot recover them back.
+
+I don’t wish to commit them → 
+
+I wish to temporarily store  these changes in a different location other than working directory
+
+We can  execute a git stash command for this.
+
+
+# git status
+
+# git ls-files
+
+Pick up any file other than .gitignore
+
+
+# vim index1.html
+
+Press i
+
+
+Insert some content
+
+
+Save the file 
+
+Press ESC key
+:wq!
+
+
+OR
+
+# echo "hello All"  >> index1.html
+
+
+# git status
+
+
+# git stash 
+
+With this all the modifications that are in working directory will be stashed
+
+How can we see out stashed changes
+
+# git stash list
+
+
+
+Here:
+stash@{0} : it is the temporary location where the stash is stored
+
+What is there in the stash stash@{0}
+
+# git show stash@{0}
+
+OR
+
+If you want to see in the .git folder
+
+# cat .git/refs/stash
+
+You will get the stash id
+
+# git show <stashID>
+
+
+
+Get the changes back to the working directory:
+=====================================
+
+#  git stash pop stash@{0}
+
+
+Changes will be back to working directory, stash will be dropped
+
+======================================
+
+Suppose we have multiple files in the working directory with status as modified
+
+
+# git ls-files
+
+Select few files
+
+# echo "hello All"  >>  index1.html
+
+# echo "hello All"  >>  index2.html
+
+
+# git stash -p
+
+Select y to add those changes to stash and n to not add the changes to stash
+
+# git stash list
+
+
+Among multiple changes if we have to send only 1 file changes to stash
+
+# git stash push filename
+
+
+This is for your information -> Extra commands in stash …No need to execute them
+===========================================
+
+Changes in working directory and changes in staging area
+
+Git stash command will stash staged as well as unstaged files
+
+Changes in working directory and untracked file(new file)
+
+
+If we give git stash → only modified files will be stashed.. New file remain in working directory
+
+ the untracked file should also be stashed  → how to do that?
+
+For this we have to give option : -u or  --include-untracked
+
+
+git stash -> will only stash modified files
+git stash -u → modified and untracked file
+git stash --all → all files in working directory
+
+git stash show --include-untracked  -> shows untracked file
 
 
 
