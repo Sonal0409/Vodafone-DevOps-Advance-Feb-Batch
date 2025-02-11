@@ -215,6 +215,380 @@ git stash --all → all files in working directory
 
 git stash show --include-untracked  -> shows untracked file
 
+Command to see how many branches do we have in out local repo:
+
+$ git branch
+
+
+$ git status ⇒ working tree should be clean
+
+
+Command to create a branch with name as feature1
+
+$ git branch feature1
+
+Command to switch to branch with name feature1
+
+$ git checkout feature1
+
+Switched to branch feature1
+
+Create a new file on the branch feature1
+
+$ touch login
+
+$ git status
+
+Untracked file
+
+
+$ git add login
+$ git commit -m “done on branch”
+$ git log --oneline
+
+Merging the feature1 branch to master branch
+========================
+
+By merging we mean 
+
+The source branch → login has commits that will be merged to destination branch master
+
+Always Switch to the destination branch where we have to merge
+
+$ git checkout master
+
+$ git merge feature1 master
+
+$ git log --oneline
+
+All commits of login are present in master also, login file is also there on master branch
+
+=====================================
+
+Delete a Branch : 
+
+# git branch -d feature1
+
+
+=====================================
+Rename a branch:
+
+# git branch -m oldbranhcname newbranchname
+
+# git branch -m feature1 login
+
+===========================================
+
+Rebasing:
+===========================================
+
+
+
+Delete any branches that you have
+
+# git branch -d <branchname>
+
+# git branch
+
+
+Rebasing is merging strategy that is always applied on a feature branch
+It is never applied on Master branch
+
+In case rebase the commit history on your git repository is re-arranged on the feature branch
+
+The commit history will integrated as a patch
+ >  all the commit of master branch (base branch)
+> than all the new commits of done on feature branch
+
+Demo:
+
+# git branch
+
+# git checkout master
+
+# git branch b1
+
+On the master branch make 1 commit
+
+# touch masterfile1
+
+# git add .
+# git commit -m “done on master”
+
+> Checkout to b1 branch and create 2  new commits on the feature branch
+
+# touch b1file2
+# git add .
+# git commit  -m "modified new file on b1 branch"
+
+Make second commit
+
+# touch b1file
+
+# git add .
+
+# git commit -m “done on b1 branch”
+
+
+> We are going to switch to feature branch, on the feature I want to merge the commits of 2 branches in a linear workflow , i.e we should have all commits of master branch available and then commits of feature branch should be there
+
+
+$ git rebase master
+
+ we should have all commits of master branch available and then new commits of feature branch should be there
+
+
+Create a Remote repositories
+
+To create account in github:
+
+https://github.com/
+
+
+
+Click on signup
+
+Given valid email address
+Give password
+Give username
+Click on continue.
+
+
+
+An email will be sent on your mail id
+Verify the email
+And create the account
+
+> Login to github
+
+
+
+
+
+
+
+
+
+
+
+Continue for free
+
+
+
+
+
+
+
+
+Working on Remote repository:
+================================
+
+
+
+Create a repository:
+
+
+> click on New button to create a remote repo
+> Name to the repository
+> select public repo
+> click on Create repository
+
+
+
+
+
+
+Connect Local repo to remote repo
+
+Go to git and execute this command
+
+  $ git remote add origin <your remote repo Path>
+
+Example like this:
+…
+ git remote add origin https://github.com/Sonal0409/myproject27June_sonal.git
+…
+
+Execute the command to check local and remote repo is set:
+
+  $ git remote -v
+
+To remove local repo and remote repo connection:
+
+$ git remote rm origin
+
+Command that can be used to update existing remote origin:
+
+$ git remote set-url origin <url>
+
+
+=======================================
+
+PUSH the master branch to remote repo
+===========================
+
+On the remote repo we have no code, no files no commits and no branches
+
+
+# git checkout master
+
+# git push origin master
+
+Here origin means variable storing path of remote repo 
+
+
+It will now ask to enter username
+
+Username for 'https://github.com':
+
+Here enter the token and press enter key
+
+Again it will ask for password
+
+Password for 'https://ghp_mJ92gregYqNggrggd8AY1NxkWpYigter345Q6PHAM7VxuLg26F4wB@github.com':
+
+JUST PRESS ENTER KEY, donto enter anything for apssword
+
+It will send the files and commits to remote.
+
+
+STEPS TO CREATE THE PERSONAL ACCESS TOKEN ON GIT:
+
+
+Create a Personal Access token on github
+It is a authentication method which very secure
+This is used whenever we have to push files or changes from Local to remote repo
+There is no concept of using password, instead we have to use Personal access token in git locally
+
+Demo:
+
+
+To create token on github, go to this link
+
+https://github.com/settings/tokens
+
+
+Click  Generate New token→ select token classic
+Note→ give a name to the token
+Expiration -> 30 days
+Select scope : repo (1 checkbox) 
+Click on generate token
+
+Make sure to copy your personal access token now. You won’t be able to see it again! 
+
+
+      PULL requests
+
+  	# git pull origin master
+
+Fetch
+
+# git fetch origin master
+
+=============================================
+Forking on Github
+=============================================
+
+Copying the github repo of a user into your own github account
+
+Forking operation will allow you to freely experiment changes on repo copied from other
+
+
+Demo: Collaboration with other repo on github
+====================================
+
+Step 1:
+
+Take a parent repository and make copy of it in your github account
+
+> You should be logged into github
+
+> In the browser of your machine open this repository:
+https://github.com/Sonal0409/myproject27June_sonal.git
+
+> Click on the fork button
+
+
+
+
+
+Step 2: 
+Make some changes by creating a file in your copied repo on your github account
+
+
+
+
+
+
+
+Step 3: Raise a request with parent repo to merge you files and changes
+
+We will contribute and raise Pull requests in github
+
+
+
+
+
+
+
+Click on create pull req
+
+
+
+Sync the 2 repositories
+=====================
+If parent repo is having changes/files thata r enot in your copied github repo
+Then you can click on Sync button → update branch button and merge the changes between 2 repo
+
+
+
+Cloning
+=========================
+
+It is a command to be executed on git terminal
+
+When we execute git clone command
+
+We will be able to to copy a remote repo to our local terminal
+
+# sudo su -
+
+# git clone <repoName>
+
+# git clone https://github.com/Sonal0409/myproject27June_sonal.git
+
+
+
+====================================
+Tags:
+
+Light weight tags:
+
+# git tag release-june
+
+It will add a tag to top most commit
+
+
+# git tag --list
+
+Remove a tag
+
+
+# git tag --delete release-june
+
+
+Annotated tags : tags to specific commit id
+=====================
+
+# git tag -a v1.1 -m "may-release" <give your commit>
+
+Example:
+git tag -a v1.1 -m "may-release" d88fcd8
+
+# git log --oneline
+
+
+===============================================
 
 
 
