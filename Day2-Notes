@@ -424,35 +424,7 @@ $ git remote set-url origin <url>
 
 =======================================
 
-PUSH the master branch to remote repo
-===========================
-
-On the remote repo we have no code, no files no commits and no branches
-
-
-# git checkout master
-
-# git push origin master
-
-Here origin means variable storing path of remote repo 
-
-
-It will now ask to enter username
-
-Username for 'https://github.com':
-
-Here enter the token and press enter key
-
-Again it will ask for password
-
-Password for 'https://ghp_mJ92gregYqNggrggd8AY1NxkWpYigter345Q6PHAM7VxuLg26F4wB@github.com':
-
-JUST PRESS ENTER KEY, donto enter anything for apssword
-
-It will send the files and commits to remote.
-
-
-STEPS TO CREATE THE PERSONAL ACCESS TOKEN ON GIT:
+STEPS TO CREATE THE PERSONAL ACCESS TOKEN ON GITHUB:
 
 
 Create a Personal Access token on github
@@ -475,6 +447,39 @@ Select scope : repo (1 checkbox)
 Click on generate token
 
 Make sure to copy your personal access token now. You won’t be able to see it again! 
+
+===================================
+
+PUSH the master branch to remote repo
+===========================
+
+On the remote repo we have no code, no files no commits and no branches
+
+
+# git checkout master
+
+
+
+# git push origin master
+
+Here origin means variable storing path of remote repo 
+
+
+It will now ask to enter username
+
+Username for 'https://github.com':
+
+Here enter the token and press enter key
+
+Again it will ask for password
+
+Password for 'https://ghp_mJ92gregYqNggrggd8AY1NxkWpYigter345Q6PHAM7VxuLg26F4wB@github.com':
+
+JUST PRESS ENTER KEY, donto enter anything for apssword
+
+It will send the files and commits to remote.
+
+
 
 
       PULL requests
