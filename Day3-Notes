@@ -9,6 +9,16 @@ sudo apt-get remove --purge jenkins -y
 
 sudo apt-get autoremove jenkins -y
 
+Install java 17 on the lab:
+================================================
+# apt install openjdk-17-jdk openjdk-17-jre -y
+
+# update-java-alternatives --list
+
+# sudo update-alternatives --config java
+
+Select/Enter the number 0
+
 Install Jenkins:
 ==============================
 sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
