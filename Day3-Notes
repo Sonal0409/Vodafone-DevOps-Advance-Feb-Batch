@@ -33,6 +33,11 @@ sudo apt-get install jenkins
 
 sudo systemctl start jenkins
 
+sudo systemctl status jenkins
+
+Jenkisn should be up and running
+=========================
+
 Go to browser:
 
 localhost:8080
