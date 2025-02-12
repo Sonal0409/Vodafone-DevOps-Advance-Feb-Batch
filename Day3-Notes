@@ -5,9 +5,9 @@ Demo 1: Remove Current version of Jenkins from lab and upgrade to new version of
 
 sudo service jenkins stop
 
-sudo apt-get remove --purge jenkins
+sudo apt-get remove --purge jenkins -y
 
-sudo apt-get autoremove jenkins
+sudo apt-get autoremove jenkins -y
 
 Install Jenkins:
 ==============================
