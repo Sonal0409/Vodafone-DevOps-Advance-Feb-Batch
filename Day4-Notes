@@ -4,6 +4,9 @@ $ ansible --version
 
 Establish SSH connection controller machine and host machine:
 *************************
+
+$ sudo su -
+
 Establish SSH key pair in linux system to have SSH connectivity with localhost using the following commands:
 
 $ ssh-keygen -t rsa (Press Enter when asked for File and Paraphrase details)
