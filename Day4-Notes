@@ -1,0 +1,59 @@
+Check Ansible Installation:
+*****************************
+$ ansible --version
+
+Establish SSH connection controller machine and host machine:
+*************************
+Establish SSH key pair in linux system to have SSH connectivity with localhost using the following commands:
+
+$ ssh-keygen -t rsa (Press Enter when asked for File and Paraphrase details)
+
+$ cd
+
+$ cat .ssh/id_rsa.pub >> .ssh/authorized_keys
+
+[OR] when connecting with public server host
+
+$ ssh-copy-id -i username@ipHost
+
+Add the host ‘localhost’  in ansible host file:
+
+$ vim /etc/ansible/hosts
+
+
+[webserver]
+localhost:42006
+
+
+
+Ad Hoc Commands in Ansible
+
+
+$ ansible webserver -m ping
+$ ansible webserver -m command -a "df -h"
+$ ansible webserver -m command -a “uptime”
+
+
+Playbooks:
+==========================================
+
+# cd /etc/ansible
+
+# vim playbook1.yml
+
+- name: debug and register module
+  hosts: webserver
+  tasks:
+  - name: Print a message
+    debug: msg="Ansible Playbook Execution"
+  - name: Execute a command on the host server
+    command: hostname -s
+    register: hostname_output  # here we are creating a variable
+  - name: Show the output
+    debug: var=hostname_output.stdout
+
+Save the file (:wq!)
+
+Execute the playbook: 
+# ansible-playbook playbook1.yml --syntax-check
+# ansible-playbook playbook1.yml 
