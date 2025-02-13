@@ -23,11 +23,12 @@ Add the host ‘localhost’  in ansible host file:
 
 $ vim /etc/ansible/hosts
 
+press i to insert data, scroll to the bottom and enter below text
 
 [webserver]
 localhost:42006
 
-
+Save the file . Esc key --> :wq --> enter key
 
 Ad Hoc Commands in Ansible
 
