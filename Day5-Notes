@@ -343,7 +343,11 @@ Save the file
 
 Save the file and exeucte the playbook
 
+Validate: 
 
+# cat /etc/filedemo.conf
+
+# cat /etc/webfile.conf
 
 
 
