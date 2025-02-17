@@ -106,6 +106,51 @@ save the file
 
 # ansible-playbook playbook6.yml
 
+==========================================
+Deploy HTML code on Apache2 server
+
+
+# vim index.html
+
+<h1> This file is form Ansible </h1>
+Deployed by Ansible controller
+
+Save the file
+
+
+# vim playbook7.yml
+
+
+- name: Deploy HTML code on apache2 server
+  hosts: localhost
+  become: true
+  vars:
+   pkg_name: apache2
+   dest_path: /var/www/html
+  tasks:
+  - name: Install a package
+    package: name={{pkg_name}} state=present
+  - name: Start apache2 service
+    service: name={{pkg_name}} state=started
+  - name: Deploy HTML code
+    copy: src=index.html dest={{dest_path}}
+  - name: Restart apache2 server
+    service: name={{pkg_name}} state=restarted
+
+
+Save the playbook and run
+
+
+# ansible-playbook playbook7.yml
+
+
+open the browser of the lab and give 
+
+localhost:80
+
+
+you wills ee your app deployed
+
 
 
 
