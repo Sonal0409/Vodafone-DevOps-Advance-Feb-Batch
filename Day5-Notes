@@ -288,8 +288,60 @@ Save the file
 
 # ansible-playbook playbook-vault.yml --ask-vault-pass
 
-Change the password of encrypted file:
 
+===================================================
+Jinja2 in Ansible
+====================================================
+
+# vim webfile.conf.j2
+
+This file is a configuration file
+
+This file is created at /etc directory of the system
+
+This file consist of default paramters
+
+Parameters_list:
+
+hostname = {{ansible_nodename}}
+IP address = {{ansible_default_ipv4["address"]}}
+OS = {{ansible_os_family}}
+sysadmin = {{admin_name}}
+
+Save the file.
+
+# vim filedemo.conf
+
+This file is a configuration file
+
+This file is created at /etc directory of the system
+
+This file consist of default paramters
+
+Parameters_list:
+
+hostname = {{ansible_nodename}}
+IP address = {{ansible_default_ipv4["address"]}}
+OS = {{ansible_os_family}}
+sysadmin = {{admin_name}}
+
+Save the file
+
+
+# vim playbookJinja2.yml
+
+- name: Jinja2 Templates
+  hosts: webserver
+  become: true
+  vars:
+   admin_name: Ansible_admin
+  tasks:
+  - name: Copy a file using copy module
+    copy: src=filedemo.conf dest=/etc
+  - name: Copy a jinja2 file using template module
+    template: src=webfile.conf.j2 dest=/etc/webfile.conf
+
+Save the file and exeucte the playbook
 
 
 
