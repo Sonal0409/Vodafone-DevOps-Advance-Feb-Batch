@@ -186,6 +186,109 @@ Save the file
 # ansible-playbook playbook8.yml
 
 
+===================================================
+Ansible Vault:
+======================================
+
+Ansible playbook cannot store data in an encrypted format
+
+In Ansible we have a utility called as Ansible vault which can be used to store secret text or passwords in an encrypted format
+
+These vaults are password protected.
+
+These vaults can take input as plain text and convert them and store the data in an encrypted format
+
+An ansible vault will use an algorithm called as AES256 to encrypt the data.
+
+Ansible vault can also decrypt the data also.
+
+Ansible playbook if it needs secret data, it will access the data from Ansible vault while playbook execution.
+For this we also have to provide vault access and password to ansible playbook.
+
+
+Demo 1: Use ansible vault to create a new Encrypted file and store it in the vault
+
+
+# ansible-vault create vault1.yml
+New vault password: 123
+Confirm password: 123
+
+Now file will open and enter below text
+
+Confidential data !
+
+Save the file
+
+
+# cat vault1.yml
+
+Demo 2: using Ansible vault command view the encrypted data
+
+# ansible-vault view vault1.yml
+Vault password : 123
+
+
+Demo 3: Take an existing file with some text and encrypt it
+
+
+# echo "This is secret text" > secretfile.txt
+
+# cat secretfile.txt
+
+# ansible-vault encrypt secretfile.txt
+New Vault password: 123
+Confirm New Vault password: 123
+Encryption successful
+
+# ansible-vault view secretfile.txt
+Vault password: 123
+
+
+Demo 4: Decrypt an encrypted file
+# ansible-vault decrypt secretfile.txt
+
+
+ansible-vault decrypt secretfile.txt
+Vault password: 123
+Decryption successful
+# cat secretfile.txt
+This is secret text
+
+
+Execution of ansible playbook using secrets:
+=====================================
+
+# ansible-vault create secrets.yml
+
+Enter password: 123
+Confirm: 123
+
+Enter the below variables:
+
+username: ansible1234
+password: ansible@123
+
+Save the file
+
+The variables are stored as encrypted data
+
+# vim playbook-vault.yml
+
+- name: Ansible vault secrets data
+  hosts: webserver
+  become: true
+  vars_files:
+   - secrets.yml
+  tasks:
+  - name: Create a user on worker nodes
+    user: name={{username}} password={{password}}
+
+
+Save the file
+
+# ansible-playbook playbook-vault.yml --ask-vault-pass
+
+Change the password of encrypted file:
 
 
 
