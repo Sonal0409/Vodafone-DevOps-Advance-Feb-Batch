@@ -93,7 +93,7 @@ Save the file
 # ansible-playbook playbook5.yml
 
 
-# vim playbook7.yml
+# vim playbook6.yml
 
 - hosts: webserver
   tasks:
@@ -104,7 +104,7 @@ Save the file
 
 save the file
 
-# ansible-playbook playbook7.yml
+# ansible-playbook playbook6.yml
 
 
 
