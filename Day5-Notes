@@ -1,0 +1,32 @@
+# sudo su -
+
+# cd /etc/ansible
+
+Register Variable:
+
+
+# vim playbook2.yml
+
+- name: Debug module
+  hosts: webserver
+  tasks:
+  - name: Execute a command on the host
+    command: hostname -s
+    register: command_output
+  - name: Print the command output 
+    debug: var=command_output
+
+
+Save the file (:wq!)
+
+# ansible-playbook playbook2.yml
+
+
+
+
+
+
+
+
+
+
