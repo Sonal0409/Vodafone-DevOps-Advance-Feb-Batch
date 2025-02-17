@@ -154,6 +154,11 @@ you wills ee your app deployed
 =========================================
 Handlers in Ansible
 
+
+Update the index.html file
+
+# echo "update .." >> index.html
+
 # vim playbook8.yml
 
 - name: Handlers in ansible
