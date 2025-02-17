@@ -151,6 +151,38 @@ localhost:80
 
 you wills ee your app deployed
 
+=========================================
+Handlers in Ansible
+
+# vim playbook8.yml
+
+- name: Handlers in ansible
+  hosts: localhost
+  become: true
+  vars:
+   pkg_name: apache2
+   dest_path: /var/www/html
+  tasks:
+  - name: Exeucte command
+    command: hostname -s
+    notify: Execution status
+  - name: Deploy HTML code  # parent task
+    copy: src=index.html dest={{dest_path}}
+    notify: Restart apache2 server
+  handlers: # these tasks will not exeucte by themselves
+  - name: Execution status
+    debug: msg="command exeucted successfully"
+  - name: Restart apache2 server # child task
+    service: name={{pkg_name}} state=restarted
+
+
+Save the file
+
+# ansible-playbook playbook8.yml
+
+
+
+
 
 
 
