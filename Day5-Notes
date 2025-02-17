@@ -80,8 +80,6 @@ FACT VARIABLES:
   become: true
   become_user: root
   tasks:
-  - name: Update apt repo
-    command: apt-get update
   - name: Install package httpd
     package: name=httpd state=present
     when: ansible_os_family == "RedHat"
