@@ -63,7 +63,12 @@ save the file(:wq) press enter key
 
 # ansible-playbook playbook4.yml
 
+=============================================
+Pass Variable values at runtime:
+==========================================
 
+ansible-playbook playbook4.yml --extra-vars pkg_name=nano
+ansible-playbook playbook4.yml --extra-vars "pkg_name=php file_path=/tmp/file3"
 
 
 
