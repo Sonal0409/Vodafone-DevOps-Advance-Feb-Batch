@@ -71,7 +71,28 @@ ansible-playbook playbook4.yml --extra-vars pkg_name=nano
 ansible-playbook playbook4.yml --extra-vars "pkg_name=php file_path=/tmp/file3"
 
 
+FACT VARIABLES:
+=========================
 
+# vim playbook5.yml
+
+- hosts: localhost
+  become: true
+  become_user: root
+  tasks:
+  - name: Update apt repo
+    command: apt-get update
+  - name: Install package httpd
+    package: name=httpd state=present
+    when: ansible_os_family == "RedHat"
+  - name: Install package apache2
+    package: name=apache2 state=present
+    when: ansible_os_family != "RedHat"
+
+
+Save the file
+
+# ansible-playbook playbook5.yml
 
 
 
