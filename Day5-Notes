@@ -39,6 +39,30 @@ save the file (:wq!)
 
 # ansible-playbook playbook3.yml
 
+===================================
+# vim playbook4.yml
+
+- name: Install packages and create a file
+  hosts: localhost
+  become: true
+  become_user: root
+  vars:
+   pkg_name: git
+   pkg_state: present
+   file_path: /tmp/file2
+   file_state: touch
+  tasks:
+  - name: Install {{pkg_name}} on hostserver
+    package: name={{pkg_name}} state={{pkg_state}}
+  - name: Create a file on hostserver
+    file: path={{file_path}} state={{file_state}}
+
+
+save the file(:wq) press enter key
+
+
+# ansible-playbook playbook4.yml
+
 
 
 
