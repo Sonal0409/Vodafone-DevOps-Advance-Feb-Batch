@@ -93,6 +93,18 @@ Save the file
 # ansible-playbook playbook5.yml
 
 
+# vim playbook7.yml
+
+- hosts: webserver
+  tasks:
+  - name: Execute a command on the host
+    command: hostname -s
+    when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "8") or
+          (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "20")
+
+save the file
+
+# ansible-playbook playbook7.yml
 
 
 
