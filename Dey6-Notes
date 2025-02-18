@@ -187,7 +187,7 @@ Save the file
 
 Destroy the created infrastructure
 
-# terraform destroy --auto-approval
+# terraform destroy --auto-approve
 
 
 
