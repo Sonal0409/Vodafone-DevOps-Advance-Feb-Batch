@@ -108,3 +108,10 @@ Execute the command
 Save the file
 
 Execute the playbook, which inturn executes the role.
+
+
+For your information:
+
+https://github.com/Sonal0409/AnsibleRolesDemo/tree/master/roles
+
+
