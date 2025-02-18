@@ -20,9 +20,6 @@ Delete the directory that  are not needed for this scenario
 
 # sudo vim tasks/main.yml
 
-  - name: update apt-get repo
-    command: apt-get update
-    notify: Print a message
   - name: Install apache2
     package: name={{pkg_name}} state=present
   - name: Start the apache2 server
