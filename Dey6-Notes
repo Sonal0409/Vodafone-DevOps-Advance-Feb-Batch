@@ -146,5 +146,38 @@ Click on username>> click on security credentials > Select Access keys> click on
 > click on I understand the above recommendation and want to proceed to create an access key. > press next > click on create access key
 
 
+go to lab terminal:
+======================
+
+# mkdir myterraformfiles
+
+# cd myterraformfiles
+
+# vim aws_infra.tf
+
+provider "aws" {
+  region     = "us-east-1"
+   shared_credentials_files = ["~/.aws/credentials"]
+
+}
+
+
+Save the file (:wq)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
