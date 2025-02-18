@@ -257,7 +257,7 @@ variable "sg_ports"{
 
 variable "cidr"{
  type = list
- default = ["0.0.0.0/0","0.1.3.4/5"]
+ default = ["0.0.0.0/0","10.0.0.0/16"]
 }
 resource "aws_security_group" "mysg" {
   name        = "allow_tls"
