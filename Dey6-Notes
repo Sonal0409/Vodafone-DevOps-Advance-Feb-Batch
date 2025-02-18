@@ -1,0 +1,113 @@
+Ansible Roles:
+
+==============================================
+
+# sudo su -
+
+# cd /etc/ansible
+
+# cd roles
+
+Create a role apache using ansible-galaxy
+
+#  ansible-galaxy init apache
+
+# cd apache
+
+Delete the directory that  are not needed for this scenario
+
+# rm -rf README.md meta tests
+
+# sudo vim tasks/main.yml
+
+  - name: update apt-get repo
+    command: apt-get update
+    notify: Print a message
+  - name: Install apache2
+    package: name={{pkg_name}} state=present
+  - name: Start the apache2 server
+    service: name={{pkg_name}} state=started
+  - name: Copy the html code on apache2 server
+    template: src=index.html.j2 dest={{dest_path}}
+    notify: Restart Server
+
+
+Save the file
+
+Write the vars section for the playbook:
+=========================
+# sudo vim vars/main.yml
+
+Press i to insert
+pkg_name: apache2
+dest_path: /var/www/html/index.html
+email:
+ - admin@gmail.com
+ - ansible@gmail.com
+ - admin2@gmail.com
+
+
+Save the file
+
+Write the template section:
+==========================
+
+#  sudo vim templates/index.html.j2
+
+
+This is jinja2 template
+
+The webserver is running on {{ ansible_hostname }}
+
+# forloop in jinja2
+# here email is a custome variable in playbook, which will have list of values
+
+{% for item in email %}
+
+The system admin contact email is: {{item}}
+
+{% endfor %}
+
+
+Save the file.
+
+=============================
+Enter data in handlers section
+=============================
+
+# sudo vim handlers/main.yml
+
+  - name: Print a message
+    debug: msg="apt-get repo Update complete"
+  - name: Restart Server
+    service: name={{pkg_name}} state=restarted
+
+
+
+Save the file.
+
+===============================
+
+After this come out in the directory where you are writing playbooks
+
+Note: the playbook that is calling the role is written in directory other than Roles directory
+
+
+Execute the command
+
+# cd
+
+# cd /etc/ansible
+
+# vim playbookRole1.yml
+
+
+- hosts: webserver
+  become: true
+  roles:
+   - apache
+
+
+Save the file
+
+Execute the playbook, which inturn executes the role.
