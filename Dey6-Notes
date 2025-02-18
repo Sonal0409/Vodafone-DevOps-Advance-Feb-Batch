@@ -449,7 +449,96 @@ Save the file
 This will download the modules in current directory
 # terraform plan
 
+============================
+Creating a modules to create same resource in different AWS regions
+==========================================
 
+
+# cd modules
+# mkdir region_module
+
+# cd region_module
+
+# vim region.tf
+
+variable "region" {
+
+type = string
+
+}
+
+
+provider "aws" {
+
+region = var.region
+
+shared_credentials_files =  ["~/.aws/credentials"]
+
+}
+
+data "aws_ami" "myami"{
+
+most_recent = true
+
+owners = ["amazon"]
+
+filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm*"]
+  }
+
+}
+
+resource "aws_instance" "myec2-1" {
+  ami           = data.aws_ami.myami.id
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "terraform1"
+  }
+
+
+}
+
+Save the file
+
+The path of module is: /root/modules/region_module
+
+# mkdir provider_demo
+
+# cd provider_demo
+
+# vim main.tf
+
+
+variable "regions" {
+
+type = list(string)
+
+default = ["us-east-1", "us-east-2", "us-west-1"]
+
+}
+
+module "aws_region_demo" {
+
+source = "/root/modules/region_module"
+
+region = var.regions[0]
+
+}
+
+module "aws_region_demo1" {
+
+source = "/root/modules/region_module"
+
+region = var.regions[1]
+
+}
+
+
+# terraform init
+
+# terraform plan
 
 
 
