@@ -166,6 +166,27 @@ Save the file (:wq)
 
 # terraform init
 
+Add the below code in the file:
+
+# vim aws_infra.tf
+
+resource "aws_instance" "myec2" {
+  ami           = "ami-053a45fff0a704a47"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "instance-1"
+  }
+}
+
+Save the file
+
+# terraform plan
+
+# terraform apply --auto-approve
+
+
+
 
 
 
