@@ -164,7 +164,7 @@ provider "aws" {
 
 Save the file (:wq)
 
-
+# terraform init
 
 
 
