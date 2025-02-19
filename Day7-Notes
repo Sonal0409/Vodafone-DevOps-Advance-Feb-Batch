@@ -1,0 +1,49 @@
+Provisioners:
+If we have to perform a set of actions on the local machine or on the AWS remote machine we can then use terraform provisioners
+
+Local-exec provisioners:
+
+Using this provisioner terraform can run a command or a script on the local machine(lab machine) where terraform is present.
+
+Example:
+If we generate TLS private key and public key
+We can use local-exec provisioner to run a command that will copy the private key into a new file on the local machine.
+
+The provisioner block is always nested inside the resource block
+
+Demo of Local-exec provisioner:
+=====================================
+# mkdir provisioner-demo
+# cd provisioner-demo
+
+# vim main.tf
+ 
+provider "aws" {
+
+region = "us-east-1"
+
+shared_credentials_files =  ["~/.aws/credentials"]
+
+}
+
+resource "tls_private_key" "mykey" {
+  algorithm = "RSA"
+
+}
+
+resource "aws_key_pair" "aws_key" {
+  key_name   = "web-key"
+  public_key = tls_private_key.mykey.public_key_openssh
+
+  provisioner "local-exec" {
+  command = "echo '${tls_private_key.mykey.private_key_openssh}' > ./web-key.pem"
+
+}
+
+}
+
+Save the file
+
+# terraform init
+
+# terraform apply
