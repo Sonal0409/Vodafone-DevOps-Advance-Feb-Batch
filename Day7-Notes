@@ -66,3 +66,134 @@ Save the file
 # terraform init
 
 # terraform apply
+
+=======================================================
+Remote-exec provisioner:
+=============================
+Remote-exec provisioners will remotely connect to AWS resources created by terraform.
+In Remote-exec provisioners terraform will successfully connect to AWS resource over SSH and then execute a command/script on it 
+Remote-exec provisioners will have 2 parts:
+Connection : we will give SSH details to connect to remote ec2 server
+Inline : set of commands to be executed on remote ec2 server
+
+In same folder create a new file
+
+# vim aws_project.tf
+
+resource "aws_vpc" "sl-vpc" {
+ cidr_block = "10.0.0.0/16"
+  tags = {
+   Name = "sl-vpc"
+}
+
+}
+
+resource "aws_subnet" "subnet-1"{
+
+vpc_id = aws_vpc.sl-vpc.id
+cidr_block = "10.0.1.0/24"
+depends_on = [aws_vpc.sl-vpc]
+map_public_ip_on_launch = true
+  tags = {
+   Name = "sl-subnet"
+}
+
+}
+
+resource "aws_route_table" "sl-route-table"{
+vpc_id = aws_vpc.sl-vpc.id
+  tags = {
+   Name = "sl-route-table"
+}
+
+}
+
+resource "aws_route_table_association" "a" {
+  subnet_id      = aws_subnet.subnet-1.id
+  route_table_id = aws_route_table.sl-route-table.id
+}
+
+
+resource "aws_internet_gateway" "gw" {
+ vpc_id = aws_vpc.sl-vpc.id
+ depends_on = [aws_vpc.sl-vpc]
+   tags = {
+   Name = "sl-gw"
+}
+
+}
+
+resource "aws_route" "sl-route" {
+
+route_table_id = aws_route_table.sl-route-table.id
+destination_cidr_block = "0.0.0.0/0"
+gateway_id = aws_internet_gateway.gw.id
+
+
+}
+
+variable "sg_ports" {
+type = list(number)
+default = [8080,80,22,443]
+
+}
+
+
+
+
+resource "aws_security_group" "sl-sg" {
+  name        = "sg_rule"
+  vpc_id = aws_vpc.sl-vpc.id
+  dynamic  "ingress" {
+    for_each = var.sg_ports
+    iterator = port
+    content{
+    from_port        = port.value
+    to_port          = port.value
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    }
+  }
+egress {
+
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+
+
+}
+
+}
+
+
+resource "aws_instance" "myec2" {
+  ami           = "ami-053a45fff0a704a47"
+  instance_type = "t2.micro"
+  key_name = "web-key"
+  subnet_id = aws_subnet.subnet-1.id
+  security_groups = [aws_security_group.sl-sg.id]
+  tags = {
+    Name = "Terrafrom-EC2"
+  }
+  provisioner "remote-exec" {
+  connection {
+    type     = "ssh"
+    user     = "ec2-user"
+    private_key = tls_private_key.mykey.private_key_pem
+    host     = self.public_ip
+  }
+  inline = [
+  "sudo yum install httpd -y",
+  "sudo systemctl start httpd",
+  "sudo systemctl enable httpd",
+  "sudo yum install git -y"
+
+
+]
+
+}
+}
+
+# terraform init
+# terraform apply
