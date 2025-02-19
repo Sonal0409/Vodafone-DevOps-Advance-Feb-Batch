@@ -11,8 +11,24 @@ We can use local-exec provisioner to run a command that will copy the private ke
 
 The provisioner block is always nested inside the resource block
 
+
+
+Create accesskey and secret key
+
+In AWS 
+
+IAM > Users > click on add user > give a username > click next > select Attach policies directly > select AdministratorAccess below >> click on next > click on create user.
+
+Now lets attach access key and secret key to the user.
+
+Click on username>> click on security credentials > Select Access keys> click on create access key
+ > sleect Command Line Interface (CLI)
+> click on I understand the above recommendation and want to proceed to create an access key. > press next > click on create access key
+
+
 Demo of Local-exec provisioner:
 =====================================
+# sudo su -
 # mkdir provisioner-demo
 # cd provisioner-demo
 
