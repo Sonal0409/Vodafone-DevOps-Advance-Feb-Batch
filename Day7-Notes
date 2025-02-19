@@ -29,6 +29,9 @@ Click on username>> click on security credentials > Select Access keys> click on
 Demo of Local-exec provisioner:
 =====================================
 # sudo su -
+
+# aws configure
+
 # mkdir provisioner-demo
 # cd provisioner-demo
 
