@@ -323,7 +323,15 @@ save the file
 
 # docker run -d -P myimage01
 
+================================================
+Multi Stage Build dockerfile
+================================================
+https://github.com/Sonal0409/multistagebuild-GoLang.git
+git clone https://github.com/Sonal0409/multistagebuild-GoLang.git
+cd multistagebuild-GoLang
+docker build -t myimagegolang .
 
+# docker images
 
 
 
