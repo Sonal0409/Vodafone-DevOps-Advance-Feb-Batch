@@ -118,3 +118,38 @@ Step 4:
 
 # kubectl get nodes
 
+
+Step5 : remove taint form master node of lab
+
+# kubectl taint node ip-172-31-25-55  node-role.kubernetes.io/master:NoSchedule-
+
+Replace with your node name in above command [ run kubectl get nodes to get the node NAME]
+
+========================================================
+
+
+# vim pod.yml
+
+apiVersion: v1
+kind: Pod
+metadata:
+ name: pod1
+ labels:
+   app: webserver
+   author: sonal
+spec:
+ containers:
+  - name: c1
+    image: httpd
+  - name: c2
+    image: tomcat
+
+
+save the file
+
+
+# kubectl create -f pod.yml
+
+# kubectl get pods
+
+
