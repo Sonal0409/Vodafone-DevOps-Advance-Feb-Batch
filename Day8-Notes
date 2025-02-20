@@ -246,6 +246,17 @@ Save the file
 
 # kubectl create -f testpod.yml
 
+# kubectl get svc
+
+# # kubectl exec -it test-pod -- bash
+
+In the pod install curl
+
+# apt-get update && apt-get install curl -y
+
+# curl mysvc
+
+
 
 
 
