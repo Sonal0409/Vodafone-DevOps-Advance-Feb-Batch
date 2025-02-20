@@ -218,7 +218,7 @@ spec:
 
 Save the file
 
-# kubeclt create -f pod2.yml
+# kubectl create -f pod2.yml
 
 # kubectl create -f service1.yml
 # kubectl get svc
