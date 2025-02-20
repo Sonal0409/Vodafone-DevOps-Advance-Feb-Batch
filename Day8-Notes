@@ -256,6 +256,8 @@ In the pod install curl
 
 # curl mysvc
 
+give exit   => to comeout of the pod
+
 
 
 
