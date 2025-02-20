@@ -304,6 +304,101 @@ Save the file
 go to browser and give localhost:<nodeport>
 
 
+===================================
+Deployment:
+
+Creation of replicas -> ReplicaSet
+Distribution of replica
+Scaling up and scaling down
+High availability
+
+==================================
+
+vim deployment.yml
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: kubeserve
+spec:
+  replicas: 3
+  minReadySeconds: 10 # wait for 45 sec before going to deploy next pod
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1  
+      maxSurge: 1        # max number of pods to run for the deployment
+  selector:
+    matchLabels:
+      app: kubeserve
+  template:
+    metadata:
+      name: kubeserve
+      labels:
+        app: kubeserve
+    spec:
+      containers:
+       - name: app
+         image: leaddevops/kubeserve:v1
+
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+   name: kubeserve-svc
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+  selector: 
+    app: kubeserve
+
+
+Save the file
+
+# kubectl create -f deployment.yml
+
+# kubectl get deployment
+# kubectl get service
+# kubectl get pods
+# kubectl scale deployment kubeserve --replicas=5
+# kubectl get pods
+# kubectl scale deployment kubeserve --replicas=2
+Change the Image
+# kubectl set image deployment kubeserve app=leaddevops/kubeserve:v2
+# kubectl rollout status
+# kubectl set image deployment kubeserve app=leaddevops/kubeserve:v3
+# kubectl get deployment
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
