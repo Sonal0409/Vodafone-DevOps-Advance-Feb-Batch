@@ -151,5 +151,78 @@ save the file
 # kubectl create -f pod.yml
 
 # kubectl get pods
+===========================================================
+
+
+Services in Kubernetes:
+
+
+Service: 
+================
+> It is also a resource in Kubernetes
+> Allows communication between pods within the cluster or outside the cluster
+> exposes the application of the pod to be accessed by a another Pod in the Cluster.
+> Exposes the application of the pod to be accessed by an external User outside the Cluster.
+
+Why do we need a Service resource in Kubernetes?
+
+Problems:
+=======================
+> Pods should not communicate via the pod Ip address as the pod is recreated the pod Ip changes 
+
+> Pod Could not resolve by its name -> you cannot communicate to the pod via its name
+
+> You cannot access the pod outside the cluster -> using its PODIP or using the serviceIP 
+
+Service resource in Kubernetes will help you overcome the Problems
+=================================
+Service object exposes the application of 1 pod to another pod for communication
+
+3 types of service:
+> ClusterIP : It is a service that is created when we want 2 pods to communicate within the cluster
+
+====================================
+
+Create Pod - nginx
+
+# vim pod2.yml
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+ name: pod2
+ labels:
+  app: webserver
+spec:
+ containers:
+  - name: c1
+    image: nginx
+
+Save the file
+===================================
+
+# vim service1.yml
+
+apiVersion: v1
+kind: Service
+metadata: 
+ name: mysvc
+spec:
+ type: ClusterIP
+ selector:
+  app: webserver  
+ ports:
+ - targetPort: 80 
+   port: 80  
+
+Save the file
+
+# kubeclt create -f pod2.yml
+
+# kubectl create -f service1.yml
+# kubectl get svc
+
+# kubectl get endpoints
 
 
