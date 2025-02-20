@@ -259,7 +259,49 @@ In the pod install curl
 give exit   => to comeout of the pod
 
 
+=====================================
 
+Service: Node Port
+=============================================
+Using this we can access the pod from outside the cluster i.e. from our browser.
+
+By default:
+ We cannot access pod ipaddress outside the cluster
+ We cannot access the ClusterIP address outside the cluster
+
+So we have to expose the cluster to the outside world.
+
+For this we will create a Service of type NodePort.
+
+A node port is  a new port mapping which is done to the service port
+
+The node port range is 30000 to 32767
+
+Nodeport will be a port number that will be open on every node of the cluster.
+
+# vim service2.yml
+
+apiVersion: v1
+kind: Service
+metadata: 
+ name: mysvc1 
+spec:
+ type: NodePort
+ selector:
+  app: webserver  
+ ports:
+ - targetPort: 80  
+   port: 80 
+
+
+
+Save the file
+
+# kubectl create -f service2.yml
+
+# kubectl get svc
+
+go to browser and give localhost:<nodeport>
 
 
 
