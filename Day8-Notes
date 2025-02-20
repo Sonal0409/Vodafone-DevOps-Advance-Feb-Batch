@@ -221,6 +221,9 @@ Save the file
 # kubectl create -f pod2.yml
 
 # kubectl create -f service1.yml
+
+# kubectl get pods -o wide
+
 # kubectl get svc
 
 # kubectl get endpoints
