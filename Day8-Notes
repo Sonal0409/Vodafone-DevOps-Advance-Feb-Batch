@@ -73,8 +73,48 @@ Save the file.
 
 # docker-compose ps
 
+========================================================
+Kubernetes:
+=======================================================
+
+vi /etc/docker/daemon.json
+
+Press i and insert below content
+
+{
+	"exec-opts": ["native.cgroupdriver=systemd"]
+}
+
+Save the file. (:wq!)
+
+sudo service docker restart
 
 
+Step1: 
+
+##### Initiate Kube cluster
+
+sudo kubeadm init --ignore-preflight-errors=all
 
 
+Step 2:
+
+#### Setup the environment Variables
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+
+Step 3:
+## set up the  Calico network
+
+sudo kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.24.1/manifests/calico.yaml
+
+
+Step 4:
+
+#### check if Kube Master is ready or not
+
+# kubectl get nodes
 
