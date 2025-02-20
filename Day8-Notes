@@ -229,3 +229,37 @@ Save the file
 # kubectl get endpoints
 
 
+# vim testpod.yml
+
+kind: Pod
+apiVersion: v1
+metadata:
+ name: test-pod
+spec:
+ containers:
+  - name: c1
+    image: ubuntu
+    command: ["bash", "-c", "sleep 6000"]
+
+
+Save the file
+
+# kubectl create -f testpod.yml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
