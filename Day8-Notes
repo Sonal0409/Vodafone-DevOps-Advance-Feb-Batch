@@ -21,7 +21,7 @@ docker-compose --version
 
 give yes
 
-# mkdir mycomposefile && cd mycomposefiles
+# mkdir mycomposefiles && cd mycomposefiles
 
 # vim docker-compose.yml
 
