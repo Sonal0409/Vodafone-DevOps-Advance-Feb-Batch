@@ -19,7 +19,7 @@ docker-compose --version
 
 # docker system prune --all
 
-give yes
+give y  and press enter
 
 # mkdir mycomposefiles && cd mycomposefiles
 
