@@ -1,0 +1,30 @@
+Install Metric server in the Lab
+==============================================================================
+Monitoring Pods/Nodes: Metrics Server
+
+# kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+
+# wget -c  https://gist.githubusercontent.com/initcron/1a2bd25353e1faa22a0ad41ad1c01b62/raw/008e23f9fbf4d7e2cf79df1dd008de2f1db62a10/k8s-metrics-server.patch.yaml
+
+# kubectl patch deploy metrics-server -p "$(cat k8s-metrics-server.patch.yaml)" -n kube-system
+
+# kubectl get pods -n kube-system
+
+# kubectl top pods
+
+==========================================================
+Deploy a Deployment object, HPA and service objetc 
+
+# kubectl create -f https://raw.githubusercontent.com/Sonal0409/Vodafone-Kubernetes-Notes/main/Day3-Notes/hpa/hpa.yml
+
+# kubectl get all
+
+
+Open a new terminal
+
+# sudo su -
+
+execute below command, pls change the service Ipaddress to your cluster service IP
+
+kubectl run -i --tty load-generator --rm --image=busybox --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://<clusterIp>:80; done"
